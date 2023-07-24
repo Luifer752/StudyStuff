@@ -8,3 +8,6 @@ def run():
 
 if __name__=='__main__':
     run()
+
+def set():
+    return None
