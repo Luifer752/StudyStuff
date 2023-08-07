@@ -2,26 +2,25 @@ from  contextlib import contextmanager
 from time import time, sleep
 
 @contextmanager
-def context_manager():
-    start = time()
+def context_manager(sym):
+    print(10 * f"{sym}")
 
     yield
-    sleep(1)
-    end = time()
-    print(end - start)
 
-with context_manager() as manager:
+    print(10 * f"{sym}")
+
+with context_manager("-") as manager:
     print("Printing smth for hte first time")
 
 class ContextManager:
     runtime = []
 
-    def __init__(self, filename, mode):
+    def __init__(self, filename, mode, sym):
         self.filename = filename
         self.mode = mode
-        start = time()
-        ContextManager.runtime.append(start)
-        print("Init called")
+        self.sym = sym
+
+        print(10 * f"{self.sym}")
 
     def __enter__(self):
         self.file = open(self.filename, self.mode)
@@ -31,9 +30,9 @@ class ContextManager:
         end = time()
         ContextManager.runtime.append(end)
         self.file.close()
-        print(f"Runtime is: {ContextManager.runtime[1] - ContextManager.runtime[0]}")
+        print(10 * f"{self.sym}")
 
-with ContextManager('example.txt', 'w') as m:
+with ContextManager('example.txt', 'w', "*") as m:
     m.write("New Line")
     print("Printing smth AGAIN")
 
