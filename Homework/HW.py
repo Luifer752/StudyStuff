@@ -1,26 +1,12 @@
-inp = 17
+def fibonacci_generator():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
 
 
-def even_gen(inp):
-    counter = 0
-    while counter < inp:
-        if counter % 3 == 0 and counter % 5 == 0:
-            yield "FizzBuzz"
-            counter += 1
-            continue
-        elif counter % 3 == 0:
-            yield "Fizz"
-            counter += 1
-            continue
-        elif counter % 5 == 0:
-            yield "Buzz"
-            counter += 1
-            continue
-        else:
-            counter += 1
-            yield counter
+fibonacci_gen = fibonacci_generator()
 
-even = even_gen(inp)
+for i in range(100):
+    print(next(fibonacci_gen))
 
-for i in even:
-    print(i)
