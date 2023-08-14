@@ -1,13 +1,14 @@
-'''Напишіть клас "Person", який має властивості name (ім'я) і age (вік). ' \
-Зробіть ці властивості приватними, щоб вони не могли бути змінені напряму ззовні класу. ' \
-Забезпечте методи для доступу до цих властивостей та встановлення їх значень.'''
-
 
 class Char:
 
     def __init__(self, name, age):
-        self.__name = name
-        self.__age = age
+        if not name.isalpha() or not str(age).isdigit():
+            raise "Only letters allowed in name and digits in age"
+        elif age > 120 or age < 0:
+            raise "Age value should be between 0 and 120."
+        else:
+            self.__name = name
+            self.__age = age
 
     def nick_change(self, new):
         self.__name = new
@@ -20,6 +21,7 @@ class Char:
 
 ch1 = Char("Gilbert", 42)
 ch2 = Char("Fred", 12)
+ch3 = Char("Petro", 121)
 ch1.nick_change("Vasya")
 
 ch1.print_char()
