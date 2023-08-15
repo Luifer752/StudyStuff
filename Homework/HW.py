@@ -1,27 +1,54 @@
+class Animal:
 
-class Char:
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
 
-    def __init__(self, name, age):
-        if not name.isalpha() or not str(age).isdigit():
-            raise "Only letters allowed in name and digits in age"
-        elif age > 120 or age < 0:
-            raise "Age value should be between 0 and 120."
-        else:
-            self.__name = name
-            self.__age = age
+    def animal_info(self):
+        print(f'{self.name}, {self.species}')
 
-    def nick_change(self, new):
-        self.__name = new
 
-    def youth_potion(self, years):
-        self.__age = years
+class Mammal(Animal):
 
-    def print_char(self):
-        print(f"{self.__name}, {self.__age}")
+    def __init__(self, name, species, nutrition_type):
+        super().__init__(name, species)
+        self.nutrition_type = nutrition_type
 
-ch1 = Char("Gilbert", 42)
-ch2 = Char("Fred", 12)
-ch3 = Char("Petro", 121)
-ch1.nick_change("Vasya")
+    def animal_info(self):
+        print(f'{self.name}, {self.species}, {self.nutrition_type}')
 
-ch1.print_char()
+
+class Carnivore(Mammal):
+
+    def __init__(self, name, species,
+                 nutrition_type,
+                 teeth_count):
+        super().__init__(name, species, nutrition_type)
+        self.teeth_count = teeth_count
+
+    def animal_info(self):
+        print(f'{self.name}, {self.species}, {self.nutrition_type}, {self.teeth_count}')
+
+
+class Lion(Carnivore):
+
+    def __init__(self, name, species,
+                 nutrition_type,
+                 teeth_count,
+                 mane_size
+                 ):
+        super().__init__(name, species, nutrition_type, teeth_count)
+        self.mane_size = mane_size
+
+    def animal_info(self):
+        print(f'{self.name}, {self.species}, {self.nutrition_type}, {self.teeth_count},{self.mane_size}')
+
+
+lion = Lion("Lion Joe", "The cat", "Meat", "a lot of teeth", "Middle Lion's mane")
+lion.animal_info()
+
+otter = Carnivore("Otter Kel", "Otterries?", "Fish Meat", "Not that much as lion have")
+otter.animal_info()
+
+capybara = Mammal("Capy Frank", "Definitely Capybaras", "Veggies")
+capybara.animal_info()
